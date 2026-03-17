@@ -1,4 +1,4 @@
--- Xeno Executor UI Library
+-- Xeno Executor UI Library v2
 local Xeno = {}
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
@@ -32,10 +32,10 @@ function Xeno:CreateWindow(config)
     pcall(function() XenoGui.Parent = parent end)
     if not XenoGui.Parent then XenoGui.Parent = Players.LocalPlayer:WaitForChild("PlayerGui") end
 
-    -- Main Frame
+    -- Main Frame (ИСПРАВЛЕНО: ClipsDescendants вместо ClipseDescendants)
     local MainFrame = Create("Frame", {
         Parent = XenoGui, Size = UDim2.new(0, 600, 0, 400), Position = UDim2.new(0.5, -300, 0.5, -200),
-        BackgroundColor3 = Colors.Background, BackgroundTransparency = 0.05, ClipseDescendants = true
+        BackgroundColor3 = Colors.Background, BackgroundTransparency = 0.05, ClipsDescendants = true
     })
     Create("UICorner", {Parent = MainFrame, CornerRadius = UDim.new(0, 8)})
     
@@ -92,7 +92,7 @@ function Xeno:CreateWindow(config)
         local mousePos = UserInputService:GetMouseLocation()
         if isHovering then
             if (mousePos - lastMousePos).Magnitude > 2 then
-                TooltipGui.Visible = false -- Пропадает при движении (как ты просил)
+                TooltipGui.Visible = false -- Пропадает при движении
             elseif tick() - hoverStart >= 2 then
                 TooltipGui.Visible = true
                 TooltipGui.Position = UDim2.new(0, mousePos.X + 15, 0, mousePos.Y + 15)
